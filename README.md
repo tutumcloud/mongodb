@@ -17,16 +17,29 @@ Running the MongoDB server
 
 Run the following command to start MongoDB:
 
-	ID=$(sudo docker run -d -p 27017 tutum/mongodb)
+	CONTAINER_ID=$(sudo docker run -d -p 27017 tutum/mongodb)
 
+The first time that you run your container, a new random password will be set.
+To get the password, check the logs of the container by running:
 
-It will store the new container ID (like `d35bf1374e88`) in $ID. Get the allocated external port:
+	sudo docker logs $CONTAINER_ID
 
-	sudo docker port $ID 27017
+You will see an output like the following:
 
+	========================================================================
+	You can now connect to this MongoDB server using:
 
-It will print the allocated port (like 4751). Test your deployment:
+	    mongo -u admin -p 5elsT6KtjrqV --host <host> --port <port>
 
-	mongo --port 4751 --host 127.0.0.1
+	Please remember to change the above password as soon as possible!
+	========================================================================
+
+In this case, `5elsT6KtjrqV` is the password set. To get the allocated port to MongoDB, execute:
+
+	sudo docker port $CONTAINER_ID 27017
+
+It will print the allocated port (like 4751). You can then connect to MongoDB:
+
+	 mongo -u admin -p 5elsT6KtjrqV --host 127.0.0.1 --port 4751
 
 Done!
