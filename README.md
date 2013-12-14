@@ -29,7 +29,7 @@ You will see an output like the following:
 	========================================================================
 	You can now connect to this MongoDB server using:
 
-	    mongo -u admin -p 5elsT6KtjrqV --host <host> --port <port>
+	    mongo admin -u admin -p 5elsT6KtjrqV --host <host> --port <port>
 
 	Please remember to change the above password as soon as possible!
 	========================================================================
