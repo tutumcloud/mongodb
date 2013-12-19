@@ -9,8 +9,8 @@ RUN apt-get install -y mongodb-10gen pwgen
 RUN mkdir -p /data/db
 
 # Add run scripts
-ADD ./run.sh /run.sh
-ADD ./set_mongodb_password.sh /set_mongodb_password.sh
+ADD https://raw.github.com/tutumcloud/tutum-docker-mongodb/master/run.sh /run.sh
+ADD https://raw.github.com/tutumcloud/tutum-docker-mongodb/master/set_mongodb_password.sh /set_mongodb_password.sh
 RUN chmod 755 ./*.sh
 
 EXPOSE 27017
