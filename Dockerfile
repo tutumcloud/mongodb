@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:quantal
 MAINTAINER Fernando Mayo <fernando@tutum.co>
 
 # Install MongoDB server from official repo
