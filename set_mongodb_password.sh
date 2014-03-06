@@ -8,8 +8,9 @@ fi
 /usr/bin/mongod --smallfiles &
 sleep 3
 
-PASS=$(pwgen -s 12 1)
-echo "=> Creating an admin user with a random password in MongoDB"
+PASS=${MONGODB_PASS:-$(pwgen -s 12 1)}
+_word=$( [ ${MONGODB_PASS} ] && echo "preset" || echo "random" )
+echo "=> Creating an admin user with a ${_word} password in MongoDB"
 mongo admin --eval "db.addUser({user: 'admin', pwd: '$PASS', roles: [ 'userAdminAnyDatabase', 'dbAdminAnyDatabase' ]});"
 mongo admin --eval "db.shutdownServer();"
 sleep 3
