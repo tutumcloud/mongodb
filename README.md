@@ -53,3 +53,5 @@ set the environment variable `MONGODB_PASS` to your specific password when runni
 You can now test your new admin password:
 
 	mongo -u admin -p mypass
+
+**by http://www.tutum.co**
