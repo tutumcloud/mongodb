@@ -5,13 +5,13 @@ if [ -f /.mongodb_password_set ]; then
 	exit 0
 fi
 
-/usr/bin/mongod --smallfiles &
+/usr/bin/mongod --smallfiles --nojournal &
 
 PASS=${MONGODB_PASS:-$(pwgen -s 12 1)}
 _word=$( [ ${MONGODB_PASS} ] && echo "preset" || echo "random" )
 
 RET=1
-while [[ RET -ne -0 ]]; do
+while [[ RET -ne 0 ]]; do
     echo "=> Waiting for confirmation of MongoDB service startup"
     sleep 5
     mongo admin --eval "help" >/dev/null 2>&1
