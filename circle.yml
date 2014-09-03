@@ -1,0 +1,10 @@
+machine:
+  services:
+    - docker
+dependencies:
+  override:
+    - docker build -t mongodb .
+test:
+  override:
+    - docker run -d -p 27077:27017 -e MONGODB_PASS="mypass" mongodb; sleep 30
+    - mongo admin -uadmin -pmypass --eval "db.stats();" --host localhost --port 27077
