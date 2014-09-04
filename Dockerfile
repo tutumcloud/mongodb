@@ -12,4 +12,6 @@ ADD set_mongodb_password.sh /set_mongodb_password.sh
 RUN chmod 755 ./*.sh
 
 EXPOSE 27017
+EXPOSE 28017
+
 CMD ["/run.sh"]

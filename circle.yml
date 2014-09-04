@@ -6,5 +6,6 @@ dependencies:
     - docker build -t mongodb .
 test:
   override:
-    - docker run -d -p 27077:27017 -e MONGODB_PASS="mypass" mongodb; sleep 30
+    - docker run -d -p 27077:27017 -p 28077:28017 -e MONGODB_PASS="mypass" mongodb; sleep 30
     - mongo admin -uadmin -pmypass --eval "db.stats();" --host localhost --port 27077
+    - curl --user admin:mypass --digest  http://localhost:28077/hostInfo\?text\=1
