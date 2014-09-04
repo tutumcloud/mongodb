@@ -1,9 +1,11 @@
 FROM ubuntu:trusty
 MAINTAINER Fernando Mayo <fernando@tutum.co>
 
-RUN apt-get update 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mongodb
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y pwgen
+RUN apt-get update && \
+    apt-get install -y mongodb pwgen && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+    
 RUN mkdir -p /data/db
 
 # Add run scripts
