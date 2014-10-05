@@ -1,5 +1,10 @@
-FROM ubuntu:trusty
+FROM ubuntu:14.04
 MAINTAINER Fernando Mayo <fernando@tutum.co>
+
+RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt utopic main restricted universe multiverse \n\
+deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-updates main restricted universe multiverse \n\
+deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-backports main restricted universe multiverse \n\
+deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-security main restricted universe multiverse" > /etc/apt/sources.list.d/all-mirrors.list
 
 RUN apt-get update && \
     apt-get install -y mongodb pwgen && \
