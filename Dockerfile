@@ -7,6 +7,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
     
 RUN mkdir -p /data/db
+VOLUME /data/db
 
 # Add run scripts
 ADD run.sh /run.sh
