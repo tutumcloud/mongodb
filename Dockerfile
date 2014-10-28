@@ -14,7 +14,7 @@ RUN apt-get update && \
 RUN mkdir -p /data/db
 VOLUME /data/db
 
-ENV auth yes
+ENV AUTH yes
 
 # Add run scripts
 ADD run.sh /run.sh
