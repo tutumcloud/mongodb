@@ -3,7 +3,7 @@ if [ ! -f /.mongodb_password_set ]; then
 	/set_mongodb_password.sh
 fi
 
-if [ "$auth" == "yes" ]; then
+if [ "$AUTH" == "yes" ]; then
     export mongodb='/usr/bin/mongod --nojournal --auth --httpinterface --rest'
 else
     export mongodb='/usr/bin/mongod --nojournal --httpinterface --rest'
