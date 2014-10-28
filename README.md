@@ -55,4 +55,13 @@ You can now test your new admin password:
         mongo admin -u admin -p mypass
         curl --user admin:mypass --digest http://localhost:28017/
 
+Run MongoDB without password
+----------------------------
+
+If you want run MongoDB without password you can set tge environment variable `AUTH` to specific if you want password or not when running the container:
+
+        docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no tutum/mongodb
+
+By default is "yes".
+
 **by http://www.tutum.co**
