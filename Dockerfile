@@ -14,6 +14,8 @@ RUN apt-get update && \
 RUN mkdir -p /data/db
 VOLUME /data/db
 
+ENV auth yes
+
 # Add run scripts
 ADD run.sh /run.sh
 ADD set_mongodb_password.sh /set_mongodb_password.sh
