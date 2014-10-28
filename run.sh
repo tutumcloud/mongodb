@@ -4,14 +4,16 @@ if [ ! -f /.mongodb_password_set ]; then
 fi
 
 if [ "$auth" == "yes" ]; then
-    mongodb = '/usr/bin/mongod --nojournal --auth --rest'
+    export mongodb='/usr/bin/mongod --nojournal --auth --httpinterface --rest'
 else
-    mongodb = '/usr/bin/mongod --nojournal --rest'
+    export mongodb='/usr/bin/mongod --nojournal --httpinterface --rest'
+fi
 
 if [ ! -f /data/db/mongod.lock ]; then
     eval $mongodb
 else
+    export mongodb=$mongodb' --dbpath /data/db' 
     rm /data/db/mongod.lock
-    mongod --dbpath /data/db --repair && eval $mongodb --dbpath /data/db
+    mongod --dbpath /data/db --repair && eval $mongodb
 fi
 
