@@ -10,10 +10,10 @@ else
 fi
 
 if [ ! -f /data/db/mongod.lock ]; then
-    eval $mongodb
+    exec $mongodb
 else
     export mongodb=$mongodb' --dbpath /data/db' 
     rm /data/db/mongod.lock
-    mongod --dbpath /data/db --repair && eval $mongodb
+    mongod --dbpath /data/db --repair && exec $mongodb
 fi
 
