@@ -1,6 +1,11 @@
 #!/bin/bash
+if [ -f /data/db/mongod.lock ]; then
+    rm /data/db/mongod.lock
+    mongod --dbpath /data/db --repair
+fi
+
 if [ ! -f /.mongodb_password_set ]; then
-	/set_mongodb_password.sh
+    /set_mongodb_password.sh
 fi
 
 if [ "$AUTH" == "yes" ]; then
