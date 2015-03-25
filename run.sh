@@ -1,6 +1,8 @@
 #!/bin/bash
-if [ -f /data/db/mongod.lock ]; then
-    rm /data/db/mongod.lock
+
+lockfile=/data/db/mongod.lock
+if [ -f $lockfile ]; then
+    rm $lockfile
     mongod --dbpath /data/db --repair
 fi
 
@@ -14,11 +16,11 @@ else
     export mongodb='/usr/bin/mongod --nojournal --httpinterface --rest'
 fi
 
-if [ ! -f /data/db/mongod.lock ]; then
+if [ ! -f $lockfile ]; then
     exec $mongodb
 else
     export mongodb=$mongodb' --dbpath /data/db' 
-    rm /data/db/mongod.lock
+    rm $lockfile
     mongod --dbpath /data/db --repair && exec $mongodb
 fi
 
