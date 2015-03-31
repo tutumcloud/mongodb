@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [ -f /.mongodb_password_set ]; then
+if [ -f /data/db/.mongodb_password_set ]; then
 	echo "MongoDB password already set!"
 	exit 0
 fi
 
-/usr/bin/mongod --smallfiles --nojournal &
+mongod --smallfiles --nojournal &
 
 PASS=${MONGODB_PASS:-$(pwgen -s 12 1)}
 _word=$( [ ${MONGODB_PASS} ] && echo "preset" || echo "random" )
@@ -19,11 +19,11 @@ while [[ RET -ne 0 ]]; do
 done
 
 echo "=> Creating an admin user with a ${_word} password in MongoDB"
-mongo admin --eval "db.addUser({user: 'admin', pwd: '$PASS', roles:[{role:'root',db:'admin'}]});"
+mongo admin --eval "db.createUser({user: 'admin', pwd: '$PASS', roles:[{role:'root',db:'admin'}]});"
 mongo admin --eval "db.shutdownServer();"
 
 echo "=> Done!"
-touch /.mongodb_password_set
+touch /data/db/.mongodb_password_set
 
 echo "========================================================================"
 echo "You can now connect to this MongoDB server using:"
