@@ -3,9 +3,16 @@ machine:
     - docker
 dependencies:
   override:
-    - docker build -t mongodb .
+    - docker build -t mongodb-2.6 2.6/
+    - docker build -t mongodb-3.0 3.0/
 test:
   override:
-    - docker run -d -p 27077:27017 -p 28077:28017 -e MONGODB_PASS="mypass" mongodb; sleep 30
-    - mongo admin -uadmin -pmypass --eval "db.stats();" --host localhost --port 27077
+    # test mongodb 2.6
+    - docker run -d -p 28077:28017 -e MONGODB_PASS="mypass" --name mongodb-2.6 mongodb-2.6; sleep 30
+    - docker run --link mongodb-2.6:db mongodb-2.6 mongo admin -uadmin -pmypass --eval "db.stats();" --host db --port 27017
     - curl --user admin:mypass --digest  http://localhost:28077/hostInfo\?text\=1
+
+    # test mongodb 3.0
+    - docker run -d -p 28087:28017 -e MONGODB_PASS="mypass" --name mongodb-3.0 mongodb-3.0; sleep 30
+    - docker run --link mongodb-3.0:db mongodb-3.0 mongo admin -uadmin -pmypass --eval "db.stats();" --host db --port 27017
+    - curl --user admin:mypass --digest  http://localhost:28087/hostInfo\?text\=1
