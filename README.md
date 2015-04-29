@@ -4,12 +4,18 @@ tutum-docker-mongodb
 Base docker image to run a MongoDB database server
 
 
+MongoDB version
+-------------
+
+Different versions are built from different folders. If you want to use MongoDB, please check our `tutum/mmongodb` image: https://github.com/tutumcloud/tutum-docker-mongodb
+
+
 Usage
 -----
 
 To create the image `tutum/mongodb`, execute the following command on the tutum-mongodb folder:
 
-        docker build -t tutum/mongodb .
+        docker build -t tutum/mongodb 2.6/ .
 
 
 Running the MongoDB server
@@ -58,10 +64,21 @@ You can now test your new admin password:
 Run MongoDB without password
 ----------------------------
 
-If you want run MongoDB without password you can set tge environment variable `AUTH` to specific if you want password or not when running the container:
+If you want to run MongoDB without password you can set the environment variable `AUTH` to specific if you want password or not when running the container:
 
         docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no tutum/mongodb
 
 By default is "yes".
+
+
+Run MongoDB with a specific storage engine
+------------------------------------------
+
+In MongoDB 3.0 there is a new environment variable `STORAGE_ENGINE` to specific the mongod storage driver:
+
+        docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no -e STORAGE_ENGINE=wiredTiger tutum/mongodb:3.0
+
+By default is "wiredTiger".
+
 
 **by http://www.tutum.co**
