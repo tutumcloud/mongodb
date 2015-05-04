@@ -1,6 +1,12 @@
 #!/bin/bash
 
-mongod --storageEngine $STORAGE_ENGINE --smallfiles --nojournal &
+
+if [ "$JOURNALING" == "no" ]; then
+    mongod --storageEngine $STORAGE_ENGINE --smallfiles --nojournal &
+else
+    mongod --storageEngine $STORAGE_ENGINE --smallfiles &
+fi
+
 
 PASS=${MONGODB_PASS:-$(pwgen -s 12 1)}
 _word=$( [ ${MONGODB_PASS} ] && echo "preset" || echo "random" )
