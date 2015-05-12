@@ -1,6 +1,8 @@
 tutum-docker-mongodb
 ====================
 
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
+
 Base docker image to run a MongoDB database server
 
 
@@ -40,7 +42,7 @@ You will see an output like the following:
         Please remember to change the above password as soon as possible!
         ========================================================================
 
-In this case, `5elsT6KtjrqV` is the password set. 
+In this case, `5elsT6KtjrqV` is the password set.
 You can then connect to MongoDB:
 
          mongo admin -u admin -p 5elsT6KtjrqV

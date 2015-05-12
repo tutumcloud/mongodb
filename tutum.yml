@@ -1,0 +1,7 @@
+db:
+  image: tutum/mongodb 2.6/
+  environment:
+    MONGODB_PASS: "**ChangeMe**"
+  ports:
+    - 27017:27017
+    - 28017:28017
