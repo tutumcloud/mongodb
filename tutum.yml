@@ -1,5 +1,5 @@
 db:
-  image: tutum/mongodb 2.6/
+  image: tutum/mongodb
   environment:
     MONGODB_PASS: "**ChangeMe**"
   ports:
