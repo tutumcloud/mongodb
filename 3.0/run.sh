@@ -13,7 +13,7 @@ if [ ! -f $db_path/.mongodb_password_set ]; then
     /set_mongodb_password.sh
 fi
 
-cmd="$mongodb_cmd --httpinterface --rest"
+cmd="$mongodb_cmd --httpinterface --rest --master"
 if [ "$AUTH" == "yes" ]; then
     cmd="$cmd --auth"
 fi
