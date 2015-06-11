@@ -1,5 +1,9 @@
 #!/bin/bash
 
+lockfile=/data/db/mongod.lock
+if [ -f $lockfile ]; then
+    rm $lockfile
+fi
 
 if [ "$JOURNALING" == "no" ]; then
     mongod --storageEngine $STORAGE_ENGINE --smallfiles --nojournal &

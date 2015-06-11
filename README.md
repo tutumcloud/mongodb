@@ -7,7 +7,7 @@ Base docker image to run a MongoDB database server
 
 
 MongoDB version
--------------
+---------------
 
 Different versions are built from different folders. If you want to use MongoDB, please check our `tutum/mmongodb` image: https://github.com/tutumcloud/tutum-docker-mongodb
 
@@ -78,9 +78,19 @@ Run MongoDB with a specific storage engine
 
 In MongoDB 3.0 there is a new environment variable `STORAGE_ENGINE` to specific the mongod storage driver:
 
-        docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no -e STORAGE_ENGINE=wiredTiger tutum/mongodb:3.0
+        docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no -e STORAGE_ENGINE=mmapv1 tutum/mongodb:3.0
 
 By default is "wiredTiger".
+
+
+Change the default oplog size
+-----------------------------
+
+In MongoDB 3.0 the variable `OPLOG_SIZE` can be used to specify the mongod oplog size in megabytes:
+
+        docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no -e OPLOG_SIZE=50 tutum/mongodb:3.0
+
+By default MongoDB allocates 5% of the available free disk space, but will always allocate at least 1 gigabyte and never more than 50 gigabytes.
 
 
 **by http://www.tutum.co**
