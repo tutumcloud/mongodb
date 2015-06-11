@@ -1,18 +1,12 @@
 #!/bin/bash
 
-lockfile=/data/db/mongod.lock
-mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE"
-if [ -f $lockfile ]; then
-    rm $lockfile
-    echo "Reparing database"
-    $mongodb_cmd --repair
-fi
-
-if [ ! -f $db_path/.mongodb_password_set ]; then
+if [ -f /data/db/.mongodb_password_set ]; then
 	echo "MongoDB password already set!"
+else
     /set_mongodb_password.sh
 fi
 
+mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE"
 cmd="$mongodb_cmd --httpinterface --rest --master"
 if [ "$AUTH" == "yes" ]; then
     cmd="$cmd --auth"
@@ -22,11 +16,14 @@ if [ "$JOURNALING" == "no" ]; then
     cmd="$cmd --nojournal"
 fi
 
-if [ ! -f $lockfile ]; then
-    exec $cmd
-else
-    rm $lockfile
-    echo "Reparing database"
-    $mongodb_cmd --repair && exec $cmd
+if [ "$OPLOG_SIZE" != "" ]; then
+    cmd="$cmd --oplogSize $OPLOG_SIZE"
 fi
+
+lockfile=/data/db/mongod.lock
+if [ -f $lockfile ]; then
+    rm $lockfile
+fi
+
+exec $cmd
 
