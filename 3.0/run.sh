@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 if [ -f /data/db/.mongodb_password_set ]; then
 	echo "MongoDB password already set!"
 else
