@@ -1,10 +1,5 @@
 #!/bin/bash
-
-if [ -f /data/db/.mongodb_password_set ]; then
-	echo "MongoDB password already set!"
-else
-    /set_mongodb_password.sh
-fi
+set -m
 
 mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE"
 cmd="$mongodb_cmd --httpinterface --rest --master"
@@ -20,10 +15,10 @@ if [ "$OPLOG_SIZE" != "" ]; then
     cmd="$cmd --oplogSize $OPLOG_SIZE"
 fi
 
-lockfile=/data/db/mongod.lock
-if [ -f $lockfile ]; then
-    rm $lockfile
+$cmd &
+
+if [ ! -f /data/db/.mongodb_password_set ]; then
+    /set_mongodb_password.sh
 fi
 
-exec $cmd
-
+fg

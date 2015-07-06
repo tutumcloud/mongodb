@@ -1,17 +1,5 @@
 #!/bin/bash
 
-lockfile=/data/db/mongod.lock
-if [ -f $lockfile ]; then
-    rm $lockfile
-fi
-
-if [ "$JOURNALING" == "no" ]; then
-    mongod --storageEngine $STORAGE_ENGINE --smallfiles --nojournal &
-else
-    mongod --storageEngine $STORAGE_ENGINE --smallfiles &
-fi
-
-
 PASS=${MONGODB_PASS:-$(pwgen -s 12 1)}
 _word=$( [ ${MONGODB_PASS} ] && echo "preset" || echo "random" )
 
@@ -25,7 +13,6 @@ done
 
 echo "=> Creating an admin user with a ${_word} password in MongoDB"
 mongo admin --eval "db.createUser({user: 'admin', pwd: '$PASS', roles:[{role:'root',db:'admin'}]});"
-mongo admin --eval "db.shutdownServer();"
 
 echo "=> Done!"
 touch /data/db/.mongodb_password_set
