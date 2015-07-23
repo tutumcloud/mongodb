@@ -7,6 +7,10 @@ if [ "$AUTH" == "yes" ]; then
     cmd="$cmd --auth"
 fi
 
+if [ "$AUTH" == "no" ]; then
+    touch /data/db/.mongodb_password_set
+fi
+
 if [ "$JOURNALING" == "no" ]; then
     cmd="$cmd --nojournal"
 fi
