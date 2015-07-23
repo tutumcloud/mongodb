@@ -9,6 +9,14 @@ fi
 
 if [ "$AUTH" == "no" ]; then
     touch /data/db/.mongodb_password_set
+    echo "========================================================================"
+    echo "You can now connect to this MongoDB server using:"
+    echo ""
+    echo "    mongo --host <host> --port <port>"
+    echo ""
+    echo "Please remember: Having no password is a security risk and should"
+    echo "only be used during development."
+    echo "========================================================================"
 fi
 
 if [ "$JOURNALING" == "no" ]; then
