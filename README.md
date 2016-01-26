@@ -9,7 +9,7 @@ Base docker image to run a MongoDB database server
 MongoDB version
 ---------------
 
-Different versions are built from different folders. If you want to use MongoDB, please check our `tutum/mmongodb` image: https://github.com/tutumcloud/tutum-docker-mongodb
+Different versions are built from different folders. If you want to use MongoDB, please check our `tutum/mongodb` image: https://github.com/tutumcloud/tutum-docker-mongodb
 
 
 Usage
