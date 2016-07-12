@@ -92,6 +92,11 @@ If you want to run MongoDB without password you can set the environment variable
 
 By default is "yes".
 
+Run MongoDB with persistent volume
+----------------------------------
+
+We had defined a data volume `/data/db`, you can mount it. 
+
 
 Run MongoDB with a specific storage engine
 ------------------------------------------
