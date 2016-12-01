@@ -112,5 +112,13 @@ In MongoDB 3.0 the variable `OPLOG_SIZE` can be used to specify the mongod oplog
 
 By default MongoDB allocates 5% of the available free disk space, but will always allocate at least 1 gigabyte and never more than 50 gigabytes.
 
+Sets MongoDB to use a smaller default file size.
+-----------------------------
+
+If you want to run MongoDB with [option --smallfiles](https://docs.mongodb.com/manual/reference/program/mongod/#cmdoption--smallfiles) you can set the environment variable `SMALLFILES` as `yes`:
+
+        docker run -d -p 27017:27017 -p 28017:28017 -e SMALLFILES=yes tutum/mongodb
+
+By default is "no".
 
 **by http://www.tutum.co**
