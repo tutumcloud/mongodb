@@ -15,6 +15,10 @@ if [ "$OPLOG_SIZE" != "" ]; then
     cmd="$cmd --oplogSize $OPLOG_SIZE"
 fi
 
+if [ "$SMALLFILES" == "yes" ]; then
+    cmd="$cmd --smallfiles"
+fi
+
 $cmd &
 
 if [ ! -f /data/db/.mongodb_password_set ]; then
